@@ -1,0 +1,137 @@
+.top-left-box {
+    background-color: #444444;
+    width: 48%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    vertical-align: center;
+    color: #fff;
+    position: fixed;
+    top: 10px;
+    left: 10px;    
+}
+
+.top-left-box-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 5px;
+    row-gap: 5px;    
+}
+
+.top-left-box-grid-col-1 {
+    width: 300px;
+    height: 40px;
+    font-weight: bold;
+}
+
+.top-left-box-grid-col-2 {
+    width: 180px;
+    height: 40px;
+}
+
+.top-left-box-grid-col-3 {
+    width: 80px;
+    height: 40px;
+}
+
+.bottom-left-box {
+    background-color: #444444;
+    width: 25%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    vertical-align: center;
+    color: #fff;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;  
+}
+
+.hora {
+    line-height: 40px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #FFF;
+    float: left;
+    margin: 0 220px -1px; 
+    text-align: center;
+}
+
+.data {
+    line-height: 40px;
+    font-size: 18px;
+    color: #FFF;
+    float: left;
+    margin: 0 195px;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.top-right-box {
+    background-color: #444444;
+    width: 30%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    vertical-align: center;
+    color: #fff;
+    position: fixed;
+    top: 10px;
+    right: 10px;    
+}
+
+.top-right-box span {
+    cursor: pointer;
+}
+
+.bottom-right-box {
+    background-color: #444444;
+    width: 70%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    vertical-align: center;
+    color: #fff;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;    
+}
+
+.bottom-right-box-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 5px;
+    row-gap: 5px;    
+}
+
+.bottom-right-box-grid-col-1 {
+    width: 20%;
+    height: 40px;
+    font-weight: bold;
+}
+
+.bottom-right-box-grid-col-2 {
+    width: 99%;
+    height: 40px;
+}
+
+.bottom-right-box-grid-col-2 span {
+    cursor: pointer;
+}
+
+.bottom-right-box-grid-col-2-bg-sector {
+    background-color: #878787;
+}
+
+.bottom-right-box-grid-col-1-btn {
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(18,35,51,1) 41%, rgba(0,212,255,1) 100%);
+    color: #fff;
+    width: 100px;
+}
+
+
+
+
