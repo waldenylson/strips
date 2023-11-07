@@ -1,8 +1,6 @@
-// import { cssBundleHref } from "@remix-run/css-bundle";
 import { Button } from "@mui/material";
 import type { MetaFunction } from "@remix-run/node";
 import React from "react";
-// import { LinksFunction } from "@remix-run/server-runtime";
 
 import "~/routes/strips/styles.css";
 
@@ -12,11 +10,6 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
-
-// export const links: LinksFunction = () => [
-//   { rel: "stylesheet", href: styles },
-//   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-// ];
 
 export default function Index() {
   const [date, setDate] = React.useState(new Date());
@@ -36,8 +29,8 @@ export default function Index() {
     <div
       style={{
         border: "1px solid #343d46",
-        width: "99vw",
-        height: "98vh",
+        width: "99.3vw",
+        height: "98.7vh",
       }}
     >
       <div className="top-left-box">
@@ -106,29 +99,16 @@ export default function Index() {
         </div>
       </div>
       <div className="bottom-left-box">
-        {/* <div
-          style={{
-            // border: "1px solid red",
-            height: "48%",
-          }}
-        > */}
-        <span className="hora">
-          {`${date.toLocaleTimeString("en-US", {
-            hour12: false,
-          })}`}
-        </span>
-        <span className="data">
-          {`${date.toLocaleDateString("pt-BR")}`} UTC
-        </span>
-        {/* </div> */}
-        {/* <div
-          style={{
-            // border: "1px solid green",
-            height: "48%",
-          }}
-        >
-          
-        </div> */}
+        <div style={{ marginTop: "10px" }}>
+          <span className="hora">
+            {`${date.toLocaleTimeString("en-US", {
+              hour12: false,
+            })}`}
+          </span>
+          <span className="data">
+            {`${date.toLocaleDateString("pt-BR")}`} UTC
+          </span>
+        </div>
       </div>
     </div>
   );
