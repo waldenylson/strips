@@ -50,11 +50,11 @@
 
 .hora {
     line-height: 40px;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: bold;
     color: #FFF;
     float: left;
-    margin: 0 220px -1px; 
+    margin: 0 185px -1px; 
     text-align: center;
 }
 
@@ -63,7 +63,7 @@
     font-size: 18px;
     color: #FFF;
     float: left;
-    margin: 0 195px;
+    margin: 0 170px;
     text-align: center;
     margin-top: -10px;
 }
@@ -130,6 +130,14 @@
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(18,35,51,1) 41%, rgba(0,212,255,1) 100%);
     color: #fff;
     width: 100px;
+}
+
+#center {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
 
 
