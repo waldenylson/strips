@@ -7,12 +7,7 @@ import React from "react";
 import GenericDialog from "../GenericDialog";
 
 export default function StripCard() {
-  const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
-
-  const handleDrawer = () => {
-    setOpen(!open);
-  };
 
   const handleClose = React.useCallback(() => {
     setDialogOpen(false);

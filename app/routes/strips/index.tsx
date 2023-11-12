@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <div
       style={{
-        // border: "1px solid #343d46",
+        border: "1px solid #343d46",
         width: "99.3vw",
         height: "98vh",
       }}
@@ -38,7 +38,6 @@ export default function Index() {
       <div
         id="top"
         style={{
-          // border: "1px solid blue",
           height: "8%",
           width: "98vw",
           position: "relative",
@@ -86,10 +85,10 @@ export default function Index() {
       <div
         id="center"
         style={{
-          // border: "1px solid red",
+          border: "1px solid red",
           position: "relative",
-          margin: "10px 10px 20px 10px",
-          height: "83%",
+          top: "20px",
+          bottom: "5px",
         }}
       >
         {Array.from({ length: 25 }, (_, index) => (
