@@ -21,10 +21,14 @@ export default function Index() {
   const [date, setDate] = React.useState(new Date());
 
   const layout = [
-    { i: "a", x: 0, y: 0, w: 3, h: 2 },
-    { i: "b", x: 0, y: 0, w: 3, h: 2 },
-    { i: "c", x: 0, y: 0, w: 3, h: 2 },
-    { i: "d", x: 0, y: 0, w: 3, h: 2 },
+    { i: "a", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "b", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "c", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "d", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "e", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "f", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "g", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "h", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
   ];
 
   function tick() {
@@ -97,9 +101,10 @@ export default function Index() {
       <GridLayout
         className="layout"
         layout={layout}
-        cols={10}
+        cols={15}
         rowHeight={50}
         width={1500}
+        style={{ border: "1px solid", top: "20px", bottom: "50px" }}
       >
         {/* {Array.from({ length: 25 }, (_, index) => (
           <StripCard key={index} />
@@ -115,6 +120,18 @@ export default function Index() {
         </div>
         <div key="d" style={{ border: "1px solid" }}>
           d
+        </div>
+        <div key="e" style={{ border: "1px solid" }}>
+          e
+        </div>
+        <div key="f" style={{ border: "1px solid" }}>
+          f
+        </div>
+        <div key="g" style={{ border: "1px solid" }}>
+          g
+        </div>
+        <div key="h" style={{ border: "1px solid" }}>
+          h
         </div>
       </GridLayout>
 
