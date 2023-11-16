@@ -1,10 +1,14 @@
 import { Button } from "@mui/material";
 import type { MetaFunction } from "@remix-run/node";
 import React from "react";
+import GridLayout from "react-grid-layout";
 
 import StripCard from "~/components/StripCard";
 
 import "~/routes/strips/styles.css";
+
+import "node_modules/react-grid-layout/css/styles.css";
+import "node_modules/react-resizable/css/styles.css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,6 +19,13 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const [date, setDate] = React.useState(new Date());
+
+  const layout = [
+    { i: "a", x: 0, y: 0, w: 3, h: 2 },
+    { i: "b", x: 0, y: 0, w: 3, h: 2 },
+    { i: "c", x: 0, y: 0, w: 3, h: 2 },
+    { i: "d", x: 0, y: 0, w: 3, h: 2 },
+  ];
 
   function tick() {
     setDate(new Date());
@@ -82,19 +93,31 @@ export default function Index() {
           </span>
         </div>
       </div>
-      <div
-        id="center"
-        style={{
-          border: "1px solid red",
-          position: "relative",
-          top: "20px",
-          bottom: "5px",
-        }}
+
+      <GridLayout
+        className="layout"
+        layout={layout}
+        cols={10}
+        rowHeight={50}
+        width={1500}
       >
-        {Array.from({ length: 25 }, (_, index) => (
+        {/* {Array.from({ length: 25 }, (_, index) => (
           <StripCard key={index} />
-        ))}
-      </div>
+        ))} */}
+        <div key="a" style={{ border: "1px solid" }}>
+          a
+        </div>
+        <div key="b" style={{ border: "1px solid" }}>
+          b
+        </div>
+        <div key="c" style={{ border: "1px solid" }}>
+          c
+        </div>
+        <div key="d" style={{ border: "1px solid" }}>
+          d
+        </div>
+      </GridLayout>
+
       <div
         id="bottom"
         style={{
