@@ -24,11 +24,11 @@ export default function Index() {
     { i: "a", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
     { i: "b", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
     { i: "c", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "d", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "e", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "f", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "g", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "h", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "d", x: 9, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "e", x: 12, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "f", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "g", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "h", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
   ];
 
   function tick() {
@@ -101,14 +101,24 @@ export default function Index() {
       <GridLayout
         className="layout"
         layout={layout}
-        cols={15}
+        cols={16}
         rowHeight={50}
-        width={1500}
-        style={{ border: "1px solid", top: "20px", bottom: "50px" }}
+        width={2000}
+        isResizable={false}
+        style={{
+          top: "20px",
+          bottom: "50px",
+          border: "px solid",
+          margin: "10px",
+        }}
       >
         {/* {Array.from({ length: 25 }, (_, index) => (
-          <StripCard key={index} />
+          <StripCard key="a" />
         ))} */}
+        {/* <StripCard key="a" /> */}
+        <div key="a" style={{ border: "1px solid" }}>
+          a
+        </div>
         <div key="a" style={{ border: "1px solid" }}>
           a
         </div>
