@@ -21,10 +21,10 @@ export default function StripCard() {
     <Card
       sx={{
         display: "flex",
-        width: 360,
-        height: 140,
+        width: 355,
+        height: 144,
         margin: "3px 3px 3px 3px",
-        backgroundColor: "#5e5b5b",
+        backgroundColor: "#5e5b5b", // "#5e5b5b",
       }}
     >
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -33,7 +33,7 @@ export default function StripCard() {
             style={{ cursor: "pointer" }}
             component="div"
             variant="h5"
-            onClick={() => setDialogOpen(true)}
+            onAuxClick={() => setDialogOpen(true)}
           >
             TAP0000
           </Typography>

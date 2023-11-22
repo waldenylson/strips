@@ -1,14 +1,13 @@
 import { Button } from "@mui/material";
-import type { MetaFunction } from "@remix-run/node";
+import { cssBundleHref } from "@remix-run/css-bundle";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import "~/routes/strips/styles.css";
+import RGL1 from "node_modules/react-grid-layout/css/styles.css";
+import RGL2 from "node_modules/react-resizable/css/styles.css";
 import React from "react";
 import GridLayout from "react-grid-layout";
 
 import StripCard from "~/components/StripCard";
-
-import "~/routes/strips/styles.css";
-
-import "node_modules/react-grid-layout/css/styles.css";
-import "node_modules/react-resizable/css/styles.css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,18 +16,37 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: RGL1 },
+  { rel: "stylesheet", href: RGL2 },
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+];
+
 export default function Index() {
   const [date, setDate] = React.useState(new Date());
 
+  /**
+   * Disable ContextMenu
+   */
+  React.useEffect(() => {
+    const handleContextmenu = (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener("contextmenu", handleContextmenu);
+    };
+  }, []);
+
   const layout = [
-    { i: "a", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "b", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "c", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "d", x: 9, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "e", x: 12, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "f", x: 0, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "g", x: 3, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
-    { i: "h", x: 6, y: 0, w: 3, h: 2, minW: 3, maxW: 3 },
+    { i: "a", x: 0, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "b", x: 3, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "c", x: 6, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "d", x: 9, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "e", x: 12, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "f", x: 0, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "g", x: 3, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "h", x: 6, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
   ];
 
   function tick() {
@@ -112,37 +130,13 @@ export default function Index() {
           margin: "10px",
         }}
       >
-        {/* {Array.from({ length: 25 }, (_, index) => (
-          <StripCard key="a" />
-        ))} */}
-        {/* <StripCard key="a" /> */}
-        <div key="a" style={{ border: "1px solid" }}>
-          a
-        </div>
-        <div key="a" style={{ border: "1px solid" }}>
-          a
-        </div>
-        <div key="b" style={{ border: "1px solid" }}>
-          b
-        </div>
-        <div key="c" style={{ border: "1px solid" }}>
-          c
-        </div>
-        <div key="d" style={{ border: "1px solid" }}>
-          d
-        </div>
-        <div key="e" style={{ border: "1px solid" }}>
-          e
-        </div>
-        <div key="f" style={{ border: "1px solid" }}>
-          f
-        </div>
-        <div key="g" style={{ border: "1px solid" }}>
-          g
-        </div>
-        <div key="h" style={{ border: "1px solid" }}>
-          h
-        </div>
+        {layout.map((item) => {
+          return (
+            <div key={item.i} style={{ border: "0px solid" }}>
+              <StripCard />
+            </div>
+          );
+        })}
       </GridLayout>
 
       <div
