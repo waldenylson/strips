@@ -39,14 +39,14 @@ export default function Index() {
   }, []);
 
   const layout = [
-    { i: "a", x: 0, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "b", x: 3, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "c", x: 6, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "d", x: 9, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "e", x: 12, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "f", x: 0, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "g", x: 3, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
-    { i: "h", x: 6, y: 0, w: 3, h: 2.7, minW: 3, maxW: 3 },
+    { i: "a", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "b", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "c", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "d", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "e", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "f", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "g", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "h", x: 2, y: 0, w: 1, h: 2.7 },
   ];
 
   function tick() {
@@ -119,10 +119,11 @@ export default function Index() {
       <GridLayout
         className="layout"
         layout={layout}
-        cols={16}
+        cols={5}
         rowHeight={50}
-        width={2000}
+        width={1900}
         isResizable={false}
+        draggableCancel=".noDrag"
         style={{
           top: "20px",
           bottom: "50px",
@@ -130,15 +131,15 @@ export default function Index() {
           margin: "10px",
         }}
       >
-        {layout.map((item) => {
+        {layout.map((item, index) => {
           return (
             <div key={item.i} style={{ border: "0px solid" }}>
-              <StripCard />
+              <StripCard matricula={"STRIP de VOO - " + index} />
             </div>
           );
         })}
       </GridLayout>
-
+      {/* <StripCard matricula={"STRIP de VOO"} /> */}
       <div
         id="bottom"
         style={{

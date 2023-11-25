@@ -6,7 +6,11 @@ import React from "react";
 
 import GenericDialog from "../GenericDialog";
 
-export default function StripCard() {
+interface IStripCard {
+  matricula: string;
+}
+
+const StripCard: React.FC<IStripCard> = ({ matricula }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
@@ -35,19 +39,22 @@ export default function StripCard() {
             variant="h5"
             onAuxClick={() => setDialogOpen(true)}
           >
-            TAP0000
+            {matricula}
           </Typography>
           <GenericDialog
             open={dialogOpen}
             dialogHandler={dialogHandler}
-            dialogTitle="TAP0000"
+            dialogTitle={matricula}
           >
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              Mac Miller
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Praesentium ratione error veniam cupiditate nam quas qui
+              repudiandae? Recusandae, illo? Esse ipsa, ut explicabo molestiae
+              exercitationem eveniet! Nobis rerum quis temporibus?
             </Typography>
           </GenericDialog>
         </CardContent>
@@ -55,4 +62,6 @@ export default function StripCard() {
       </Box>
     </Card>
   );
-}
+};
+
+export default StripCard;
