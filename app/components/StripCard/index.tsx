@@ -37,7 +37,7 @@ const StripCard: React.FC<IStripCard> = ({ matricula }) => {
             style={{ cursor: "pointer" }}
             component="div"
             variant="h5"
-            onClick={() => setDialogOpen(true)}
+            onAuxClick={() => setDialogOpen(true)}
           >
             {matricula}
           </Typography>
