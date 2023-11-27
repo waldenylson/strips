@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
-import GenericDialog from "../GenericDialog";
+import SectionedDialog from "../dialogs/StripDetailDialog";
 
 interface IStripCard {
   matricula: string;
@@ -37,11 +37,11 @@ const StripCard: React.FC<IStripCard> = ({ matricula }) => {
             style={{ cursor: "pointer" }}
             component="div"
             variant="h5"
-            onAuxClick={() => setDialogOpen(true)}
+            onClick={() => setDialogOpen(true)}
           >
             {matricula}
           </Typography>
-          <GenericDialog
+          <SectionedDialog
             open={dialogOpen}
             dialogHandler={dialogHandler}
             dialogTitle={matricula}
@@ -56,7 +56,7 @@ const StripCard: React.FC<IStripCard> = ({ matricula }) => {
               repudiandae? Recusandae, illo? Esse ipsa, ut explicabo molestiae
               exercitationem eveniet! Nobis rerum quis temporibus?
             </Typography>
-          </GenericDialog>
+          </SectionedDialog>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>
       </Box>

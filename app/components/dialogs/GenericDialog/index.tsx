@@ -1,4 +1,4 @@
-import Dialog, { DialogProps } from "@mui/material/Dialog";
+import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -6,11 +6,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import * as React from "react";
 
-export interface IDialogData extends DialogProps {
-  dialogHandler: () => void;
-  open: DialogProps["open"];
-  dialogTitle: string;
-}
+import { IDialogData } from "../IContracts";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
