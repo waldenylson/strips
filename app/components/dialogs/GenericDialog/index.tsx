@@ -6,7 +6,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import * as React from "react";
 
-import { IDialogData } from "../IContracts";
+import { IDialogData } from "../IDialogsContract";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {

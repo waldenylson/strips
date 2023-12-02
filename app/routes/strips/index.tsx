@@ -49,6 +49,9 @@ export default function Index() {
     { i: "h", x: 2, y: 0, w: 1, h: 2.7 },
   ];
 
+  /**
+   * Date Card
+   */
   function tick() {
     setDate(new Date());
   }
