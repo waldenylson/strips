@@ -31,7 +31,9 @@ const StripDetailDialog: React.FC<IDialogData> = ({
       open={open}
       TransitionComponent={Transition}
       keepMounted
-      onClose={dialogHandler}
+      onClose={(_, reason) => {
+        reason === "escapeKeyDown" ? dialogHandler() : "";
+      }}
       aria-describedby="alert-dialog-slide-description"
       className="noDrag"
     >
