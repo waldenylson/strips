@@ -65,7 +65,7 @@ const Document = withEmotionCache(
             content="emotion-insertion-point"
           />
         </head>
-        <body style={{ backgroundColor: "#878787" }}>
+        <body style={{ backgroundColor: "#878787", overflow: "hidden" }}>
           {children}
           <ScrollRestoration />
           <Scripts />

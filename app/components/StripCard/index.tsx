@@ -1,3 +1,5 @@
+import { Edit, Info } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -37,10 +39,25 @@ const StripCard: React.FC<IStripCard> = ({ matricula }) => {
             style={{ cursor: "pointer" }}
             component="div"
             variant="h5"
-            onAuxClick={() => setDialogOpen(true)}
           >
             {matricula}
           </Typography>
+          <IconButton
+            aria-label="close"
+            onClick={() => setDialogOpen(true)}
+            className="noDrag"
+            style={{ position: "fixed", top: 8, right: 10 }}
+          >
+            <Info />
+          </IconButton>
+          <IconButton
+            aria-label="close"
+            onClick={() => setDialogOpen(true)}
+            className="noDrag"
+            style={{ position: "fixed", top: 44, right: 10 }}
+          >
+            <Edit />
+          </IconButton>
           <StripDetailDialog
             open={dialogOpen}
             dialogHandler={dialogHandler}
