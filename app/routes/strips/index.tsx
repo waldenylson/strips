@@ -7,7 +7,7 @@ import RGL2 from "node_modules/react-resizable/css/styles.css";
 import React from "react";
 import GridLayout from "react-grid-layout";
 
-import StripCard from "~/components/StripCard";
+import StripCard from "~/components/StripCard/Card";
 
 export const meta: MetaFunction = () => {
   return [
