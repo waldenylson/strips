@@ -1,13 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@mui/material";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import {
+  type LinksFunction,
+  type MetaFunction,
+  type LoaderFunction,
+  type LoaderFunctionArgs,
+  json,
+} from "@remix-run/node";
 import "~/routes/strips/styles.css";
+import { useLoaderData } from "@remix-run/react";
 import RGL1 from "node_modules/react-grid-layout/css/styles.css";
 import RGL2 from "node_modules/react-resizable/css/styles.css";
 import React from "react";
 import GridLayout from "react-grid-layout";
 
+import Clock from "~/components/clock";
 import StripCard from "~/components/StripCard/Card";
+import { db } from "~/db.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,8 +32,25 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
+export const loader: LoaderFunction = async ({
+  params,
+}: LoaderFunctionArgs) => {
+  const strips = await db.sTRIP_1.findMany({
+    where: {
+      EstadoStrip: {
+        not: "TER",
+      },
+    },
+    take: 20,
+  });
+
+  return json({ strips });
+};
+
 export default function Index() {
-  const [date, setDate] = React.useState(new Date());
+  const { strips } = useLoaderData<typeof loader>();
+
+  console.log(strips);
 
   /**
    * Disable ContextMenu
@@ -47,21 +74,19 @@ export default function Index() {
     { i: "f", x: 0, y: 0, w: 1, h: 2.7 },
     { i: "g", x: 1, y: 0, w: 1, h: 2.7 },
     { i: "h", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "i", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "a1", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "a2", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "a3", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "a4", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "a5", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "a6", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "a7", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "a8", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "a9", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "aa", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "ab", x: 4, y: 0, w: 1, h: 2.7 },
   ];
-
-  /**
-   * Date Card
-   */
-  function tick() {
-    setDate(new Date());
-  }
-
-  React.useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  }, [date]);
 
   return (
     <div
@@ -182,16 +207,7 @@ export default function Index() {
           </div>
         </div>
         <div className="bottom-left-box">
-          <div style={{ marginTop: "10px" }}>
-            <span className="hora">
-              {`${date.toLocaleTimeString("en-US", {
-                hour12: false,
-              })}`}
-            </span>
-            <span className="data">
-              {`${date.toLocaleDateString("pt-BR")}`} UTC
-            </span>
-          </div>
+          <Clock />
         </div>
       </div>
     </div>

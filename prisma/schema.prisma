@@ -1,0 +1,680 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ACCURACY {
+  CodAcc              Int       @id @default(autoincrement())
+  MensHex             String?   @db.VarChar(800)
+  Data_C              DateTime? @db.Date
+  Hora_C              DateTime? @db.Time(0)
+  LatiADS             Decimal?  @db.Decimal(10, 8)
+  LongADS             Decimal?  @db.Decimal(10, 8)
+  AccuracyADS         String?   @db.VarChar(45)
+  HoraAds             DateTime? @db.Time(0)
+  TpMsgAds            String?   @db.VarChar(90)
+  Sistema_Cod_Sistema Int?
+}
+
+model ACCURANCY1 {
+  DataSag             DateTime  @db.Date
+  HoraSag             DateTime  @db.Time(0)
+  LatiADS             Decimal?  @db.Decimal(10, 8)
+  LongADS             Decimal?  @db.Decimal(10, 8)
+  AccurancyADS        String?   @db.VarChar(10)
+  HoraAds             DateTime? @db.Time(0)
+  TypeMsgADS          String    @db.VarChar(45)
+  Sistema_Cod_Sistema Int?
+
+  @@id([DataSag, HoraSag, TypeMsgADS])
+}
+
+model ACP_ACTP {
+  idACP_ACTP   Int       @id @default(autoincrement())
+  Hex_MSG      String?   @db.VarChar(245)
+  Estacao_Down String?   @db.VarChar(45)
+  Data_C       DateTime? @db.Date
+  Hora_C       DateTime? @db.Time(0)
+  Time_Stamp   DateTime? @db.Time(0)
+  Dec_Hora_Sag DateTime? @db.Time(0)
+  Duracaoo_MSG String?   @db.VarChar(2)
+  T_ACTP       Int?
+  Tempo_Val    Int?
+  T_ACP        Int?
+  T_ACP_ACTP   Int?
+  DT_MAS       DateTime? @db.Date
+  MAS          String?   @db.VarChar(5)
+  QTD          Int?
+}
+
+model ADSError {
+  idADSError          Int       @id @default(autoincrement())
+  Data_Sag            DateTime? @db.Date
+  Hora_Sag            DateTime? @db.Time(0)
+  TStamp              DateTime? @db.Time(0)
+  Registro            String?   @db.VarChar(7)
+  Tp_Msg              String?   @db.VarChar(5)
+  Desc_Error          String?   @db.VarChar(35)
+  Latitude            String?   @db.VarChar(15)
+  Longitude           String?   @db.VarChar(15)
+  Altimetria          Int?
+  TimePassHour        Decimal?  @db.Decimal(8, 3)
+  QTD                 Int?
+  Sistema_Cod_Sistema Int?
+}
+
+model ADS_CPDLC {
+  idADS_CPDLC         Int       @id @default(autoincrement())
+  Data                DateTime? @db.Date
+  Hora                DateTime? @db.Time(0)
+  Mensagem_1          String?   @db.VarChar(245)
+  Mensagem_2          String?   @db.VarChar(650)
+  IMA                 String?   @db.VarChar(6)
+  Antena              String?   @db.VarChar(4)
+  Sistema_Cod_Sistema Int?
+  Sistema             Sistema?  @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_ADS_CPDLC_Sistema1")
+
+  @@index([Sistema_Cod_Sistema], map: "fk_ADS_CPDLC_Sistema1_idx")
+  @@index([Antena], map: "idx_antena")
+  @@index([Data], map: "idx_data")
+  @@index([Mensagem_1], map: "idx_msg1")
+}
+
+model Antena {
+  cdAntena            Int
+  TpAntena            String  @db.VarChar(5)
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_Antena_Sistema1")
+
+  @@id([cdAntena, TpAntena, Sistema_Cod_Sistema])
+  @@index([Sistema_Cod_Sistema], map: "fk_Antena_Sistema1_idx")
+}
+
+model CPDLC {
+  Id_Cpdlc             Int       @default(autoincrement())
+  Data                 DateTime? @db.DateTime(0)
+  Hex_Msg              String?   @db.VarChar(1450)
+  Hex_Msg1             String?   @db.VarChar(1450)
+  Tipo_Msg             String?   @db.VarChar(5)
+  Sistema_Cod_Sistema1 Int
+  Sistema              Sistema   @relation(fields: [Sistema_Cod_Sistema1], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_CPDLC_Sistema1")
+
+  @@id([Id_Cpdlc, Sistema_Cod_Sistema1])
+  @@index([Sistema_Cod_Sistema1], map: "fk_CPDLC_Sistema1_idx")
+  @@index([Data], map: "idx_data")
+}
+
+model CPDLC_IN {
+  idCPDLC_IN          Int       @default(autoincrement())
+  Msg_Traf_in         String?   @db.VarChar(4)
+  Dt_IN               DateTime? @db.DateTime(0)
+  Tipo_Msg            String?   @db.VarChar(6)
+  CPDLC_Id_Cpdlc      Int
+  Registro            String?   @db.VarChar(7)
+  Hex_Msg1            String?   @db.VarChar(999)
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema   @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_CPDLC_IN_Sistema1")
+
+  @@id([idCPDLC_IN, CPDLC_Id_Cpdlc, Sistema_Cod_Sistema])
+  @@index([Sistema_Cod_Sistema], map: "fk_CPDLC_IN_Sistema1_idx")
+}
+
+model CPDLC_MAS {
+  Cod_MAS             Int       @default(autoincrement())
+  Msg_Hexa            String?   @db.VarChar(1450)
+  Registro            String?   @db.VarChar(7)
+  Cod_Ima             String?   @db.VarChar(7)
+  Data                DateTime? @db.Date
+  Hora                DateTime? @db.Time(0)
+  Id_Mas              String?   @db.VarChar(6)
+  Antena              String?   @db.VarChar(3)
+  T_Antena            String?   @db.VarChar(1)
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema   @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_table1_Sistema1")
+
+  @@id([Cod_MAS, Sistema_Cod_Sistema])
+  @@index([Sistema_Cod_Sistema], map: "fk_table1_Sistema1_idx")
+  @@index([Data], map: "index3")
+}
+
+model CPDLC_RSP {
+  id_msg              Int
+  ref_msg             String   @db.VarChar(3)
+  MSG                 String?  @db.VarChar(145)
+  time_Stamp          DateTime @db.Time(0)
+  Data_Sag            DateTime @db.Date
+  Hora_Sag            DateTime @db.Time(0)
+  Tipo_Msg            String   @db.VarChar(8)
+  Registro            String   @db.VarChar(7)
+  QTD                 Int?
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema  @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_CPDLC_RSP_Sistema1")
+
+  @@id([id_msg, ref_msg, time_Stamp, Data_Sag, Hora_Sag, Registro, Sistema_Cod_Sistema])
+  @@index([Sistema_Cod_Sistema], map: "fk_CPDLC_RSP_Sistema1_idx")
+}
+
+model Capacidade {
+  DtPlano             DateTime @db.Date
+  Hora                DateTime @db.Time(0)
+  Endereco            String   @db.VarChar(9)
+  Tipo_MSG            String?  @db.VarChar(3)
+  Prefixo             String   @db.VarChar(8)
+  Tipo_Pista          String   @db.VarChar(80)
+  Descricao_Campo10   String   @db.VarChar(100)
+  PBN                 String?  @db.VarChar(100)
+  Tipo_Cap            String?  @db.VarChar(30)
+  Registro            String   @db.VarChar(10)
+  RNP                 String?  @db.VarChar(12)
+  RCP                 String?  @db.VarChar(12)
+  RSP                 String?  @db.VarChar(25)
+  QTD                 Int?
+  Sistema_cod_sistema Int
+
+  @@id([DtPlano, Hora, Endereco, Prefixo, Tipo_Pista, Registro, Descricao_Campo10])
+  @@index([Sistema_cod_sistema], map: "fk_AirPlane_Capacity_1_idx")
+}
+
+model Capacity_AO {
+  DtPlano             DateTime @db.Date
+  HrPlano             DateTime @db.Time(0)
+  Endereco            String?  @db.VarChar(8)
+  TpPlano             String?  @db.VarChar(3)
+  Prefixo             String   @db.VarChar(7)
+  TpAeronave          String?  @db.VarChar(4)
+  DescCampo10         String   @db.VarChar(60)
+  PBN                 String   @db.VarChar(30)
+  SUR                 String?  @db.VarChar(30)
+  Qtd                 String?  @db.VarChar(45)
+  Sistema_Cod_Sistema String   @db.VarChar(4)
+
+  @@id([DtPlano, HrPlano, Prefixo, DescCampo10, PBN, Sistema_Cod_Sistema])
+}
+
+model CargaStrip {
+  idCargaStrip  Int    @id @default(autoincrement())
+  CargaStripcol Bytes? @db.Blob
+}
+
+model DOWNLINK {
+  Registro            String   @db.VarChar(7)
+  Data_sag            DateTime @db.Date
+  Hora_sag            DateTime @db.Time(0)
+  Msg1                String?  @db.VarChar(400)
+  Msg2                String?  @db.VarChar(400)
+  Msg3                String?  @db.VarChar(400)
+  MSG                 String?  @db.VarChar(900)
+  Sistema_cod_sistema String?  @db.VarChar(45)
+
+  @@id([Registro, Data_sag, Hora_sag])
+  @@index([Sistema_cod_sistema], map: "idx_centro")
+  @@index([Data_sag], map: "idx_data")
+  @@index([Registro], map: "idx_registro")
+}
+
+model DataLink {
+  idDataLink Int     @default(autoincrement())
+  T_MSG      String  @db.VarChar(15)
+  D_MSG      String? @db.VarChar(210)
+
+  @@id([idDataLink, T_MSG])
+}
+
+model Decodificado_ADSCPDLC {
+  Cod_AdsCpdlc        Int       @default(autoincrement())
+  Mensagem_Hexa       String?   @db.VarChar(800)
+  Registro            String?   @db.VarChar(7)
+  Tipo_Sistema        String?   @db.VarChar(5)
+  Tipo_Msg            String?   @db.VarChar(9)
+  Id_Msg              Int?
+  Ref_Msg             String?   @db.VarChar(3)
+  Time_Stamp          DateTime? @db.Time(0)
+  Mensagem_1          String?   @db.VarChar(250)
+  Mensagem_2          String?   @db.VarChar(250)
+  Mensagem_3          String?   @db.VarChar(250)
+  Data_Sag            DateTime? @db.Date
+  Hora_Sag            DateTime? @db.Time(0)
+  TDown               Int?
+  Cod_MAS             String?   @db.VarChar(6)
+  Antena              String?   @db.VarChar(5)
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema   @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_Decodificado_ADSCPDLC_Sistema1")
+
+  @@id([Cod_AdsCpdlc, Sistema_Cod_Sistema])
+  @@index([Registro], map: "Idx_Reg")
+  @@index([Antena], map: "Idx_antena")
+  @@index([Sistema_Cod_Sistema], map: "fk_Decodificado_ADSCPDLC_Sistema1_idx")
+  @@index([Data_Sag], map: "idx_data")
+}
+
+model Estado {
+  cdEstado Int     @id @default(autoincrement())
+  UF       String? @db.VarChar(2)
+  Nome     String? @db.VarChar(45)
+}
+
+model FMC {
+  IdFMC               Int       @id
+  Num_FMC             String?   @db.VarChar(45)
+  Assunto             String?   @db.VarChar(450)
+  Ans_Atech           String?   @db.VarChar(50)
+  Data_FMC            String?   @db.VarChar(30)
+  VersaoSag           String?   @db.VarChar(35)
+  StatusSAG           String?   @db.VarChar(65)
+  Resp_Atech          String?   @db.VarChar(4000)
+  Data_Atlz_Atech     String?   @db.VarChar(45)
+  Data_Fechamento     DateTime? @db.Date
+  Status_Tiop         String?   @db.VarChar(30)
+  Observacao          String?   @db.VarChar(250)
+  Sistema_Cod_Sistema Int?
+  Sistema             Sistema?  @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_FMC_Sistema1")
+
+  @@index([Sistema_Cod_Sistema], map: "fk_FMC_Sistema1_idx")
+}
+
+model Localizacao {
+  cdLocalizacao Int
+  Descricao     String  @db.VarChar(45)
+  Cidade        String  @db.VarChar(45)
+  Lati          String? @db.VarChar(7)
+  Longi         String? @db.VarChar(9)
+
+  @@id([cdLocalizacao, Cidade, Descricao])
+}
+
+model MASRCPCOUNTE {
+  Hex_MSG             String?   @db.VarChar(1500)
+  idADS_CPDLC         Int       @default(0)
+  Cod_AdsCpdlc        Int       @default(0)
+  Data_C              String?   @db.VarChar(10)
+  Hora_C              String?   @db.VarChar(13)
+  Time_Stamp          DateTime? @db.Time(0)
+  Dec_Hora_Sag        String?   @db.VarChar(13)
+  Dec_Data_sag        String?   @db.VarChar(10)
+  Qtd                 Int       @default(0)
+  Sistema_cod_sistema Int
+
+  @@id([idADS_CPDLC, Cod_AdsCpdlc, Sistema_cod_sistema])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model MASRCPCOUNTEold {
+  Hex_MSG      String?   @db.Text
+  idADS_CPDLC  Int       @default(0)
+  Cod_AdsCpdlc Int       @default(0)
+  Data_C       DateTime? @db.Date
+  Hora_C       String?   @db.VarChar(13)
+  Time_Stamp   DateTime? @db.Time(0)
+  Dec_Hora_Sag DateTime? @db.Time(0)
+  Dec_Data_sag DateTime? @db.Date
+  Qtd          Int       @default(0)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model RSP {
+  id_msg                                     Int?
+  ref_msg                                    Int?
+  concat_mensagem_1__mensagem_2__mensagem_3_ String? @map("concat(mensagem_1, mensagem_2, mensagem_3)") @db.Text
+  time_stamp                                 String? @db.Text
+  data_sag                                   String? @db.Text
+  hora_sag                                   String? @db.Text
+  tipo_msg                                   String? @db.Text
+  registro                                   String? @db.Text
+  sistema_cod_sistema                        Int?
+
+  @@ignore
+}
+
+model RVSM {
+  Cod_RVSM            Int       @id @default(autoincrement())
+  Sistema_cod_sistema Int?
+  DataPlano           DateTime? @db.Date
+  Indicativo          String?   @db.VarChar(7)
+  Aeronave            String?   @db.VarChar(450)
+  RVSM                String?   @db.VarChar(1)
+  Adep                String?   @db.VarChar(5)
+  Ades                String?   @db.VarChar(5)
+  Fixo_1              String?   @db.VarChar(15)
+  Hora_1              DateTime? @db.Time(0)
+  Nivel_1             String?   @db.VarChar(6)
+  Aerovia             String?   @db.VarChar(25)
+  Fixo_2              String?   @db.VarChar(15)
+  Hora_2              DateTime? @db.Time(0)
+  Nivel_2             String?   @db.VarChar(6)
+  Fixo_3              String?   @db.VarChar(15)
+  Hora_3              DateTime? @db.Time(0)
+  Nivel_3             String?   @db.VarChar(6)
+  Fixo_4              String?   @db.VarChar(15)
+  Hora_4              DateTime? @db.Time(0)
+  Nivel_4             String?   @db.VarChar(6)
+  Fixo_5              String?   @db.VarChar(15)
+  Hora_5              DateTime? @db.Time(0)
+  Nivel_5             String?   @db.VarChar(6)
+  Fixo_6              String?   @db.VarChar(15)
+  Hora_6              DateTime? @db.Time(0)
+  Nivel_6             String?   @db.VarChar(6)
+  Fixo_7              String?   @db.VarChar(15)
+  Hora_7              DateTime? @db.Time(0)
+  Nivel_7             String?   @db.VarChar(6)
+  Fixo_8              String?   @db.VarChar(15)
+  Hora_8              DateTime? @db.Time(0)
+  Nivel_8             String?   @db.VarChar(6)
+  Fixo_9              String?   @db.VarChar(15)
+  Hora_9              DateTime? @db.Time(0)
+  Nivel_9             String?   @db.VarChar(6)
+  Fixo_10             String?   @db.VarChar(15)
+  Nivel_10            String?   @db.VarChar(6)
+  Hora_10             DateTime? @db.Time(0)
+  Tipo_Voo            String?   @db.VarChar(1)
+  Registro            String?   @db.VarChar(7)
+}
+
+model STRIP {
+  CAMPO1     String? @db.VarChar(11)
+  CAMPO2     String? @db.VarChar(45)
+  CAMPO3     String? @db.VarChar(45)
+  CAMPO4     String? @db.VarChar(45)
+  CAMP05     String? @db.VarChar(45)
+  CAMPO6     String? @db.VarChar(45)
+  CAMPO7     Int
+  CAMPO8     String? @db.VarChar(45)
+  CAMPO9     String? @db.VarChar(45)
+  CAMPO10    String? @db.VarChar(45)
+  CAMPO11    String? @db.VarChar(45)
+  CAMPO12    String? @db.VarChar(45)
+  CAMPO13    String? @db.VarChar(45)
+  CAMPO14    String? @db.VarChar(45)
+  CAMPO15    Int
+  CAMPO16    String? @db.VarChar(45)
+  CAMPO17    String? @db.VarChar(45)
+  CAMPO18    String? @db.VarChar(45)
+  CAMPO19    String? @db.VarChar(45)
+  CAMPO20    String? @db.VarChar(45)
+  CAMPO21    String? @db.VarChar(45)
+  CAMPO22    String? @db.VarChar(45)
+  CAMPO23    String? @db.VarChar(45)
+  CAMPO24    String? @db.VarChar(45)
+  CAMPO25    String? @db.VarChar(45)
+  CAMPO26    String? @db.VarChar(45)
+  CAMPO27    String? @db.VarChar(45)
+  CAMPO28    String? @db.VarChar(45)
+  CAMPO29    String? @db.VarChar(45)
+  CAMPO30    String? @db.VarChar(45)
+  CAMPO31    String? @db.VarChar(45)
+  CAMPO32    String? @db.VarChar(45)
+  CAMPO33    String? @db.VarChar(45)
+  CAMPO34    String? @db.VarChar(45)
+  CAMPO35    String? @db.VarChar(45)
+  CAMPO36    String? @db.VarChar(45)
+  CAMPO37    String? @db.VarChar(45)
+  CAMPO38    String? @db.VarChar(45)
+  IdxPrefixo String? @db.VarChar(8)
+  IdxHora    Int
+  IdxAdep    String  @db.VarChar(4)
+  IdxAdes    String  @db.VarChar(4)
+  WAL        String? @db.VarChar(5000)
+
+  @@id([CAMPO7, CAMPO15, IdxHora, IdxAdep, IdxAdes])
+}
+
+model STRIP_1 {
+  Prefixo             String   @db.VarChar(7)
+  Setor               String   @db.VarChar(3)
+  Adep                String   @db.VarChar(4)
+  CodSSR              String   @db.VarChar(5)
+  DtPlano             Int
+  Ades                String?  @db.VarChar(4)
+  EstadoStrip         String   @db.VarChar(3)
+  HImpStrip           Int
+  Registro            String?  @db.VarChar(5)
+  Plano               Bytes?   @db.Blob
+  Sistema_Cod_Sistema Int?
+  DT_INC              DateTime @default(now()) @db.Timestamp(0)
+  Observacoes         String?  @db.VarChar(250)
+  Sistema             Sistema? @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "Fk_sistema_cod_sistema")
+
+  @@id([Prefixo, Setor, Adep, CodSSR, DtPlano, EstadoStrip, HImpStrip])
+  @@index([Sistema_Cod_Sistema], map: "Fk_sistema_cod_sistema_idx")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model SVO {
+  COD_SVO             Int       @default(autoincrement())
+  Tipo_V              String?   @db.VarChar(3)
+  Prefixo             String?   @db.VarChar(7)
+  Adep                String?   @db.VarChar(5)
+  Orgao_Origem        String?   @db.VarChar(5)
+  Orgao_Destino       String?   @db.VarChar(5)
+  Setor               String?   @db.VarChar(5)
+  Setor_1             String?   @db.VarChar(5)
+  Ponto_I             String?   @db.VarChar(15)
+  Ponto_F             String?   @db.VarChar(15)
+  Nivel_I             Int?
+  Nivel_F             Int?
+  Data_I              DateTime? @db.Date
+  Hora_I              DateTime? @db.Time(0)
+  Data_F              DateTime? @db.Date
+  Hora_F              DateTime? @db.Time(0)
+  Campo               String?   @db.VarChar(15)
+  Local               String?   @db.VarChar(6)
+  ACTR                String?   @db.VarChar(10)
+  Registro            String?   @db.VarChar(8)
+  QTD_1               Int?
+  Sistema_cod_sistema Int
+
+  @@id([COD_SVO, Sistema_cod_sistema])
+}
+
+model Sistema {
+  Cod_Sistema           Int                     @id
+  Localidade            String?                 @db.VarChar(5)
+  ADS_CPDLC             ADS_CPDLC[]
+  Antena                Antena[]
+  CPDLC                 CPDLC[]
+  CPDLC_IN              CPDLC_IN[]
+  CPDLC_MAS             CPDLC_MAS[]
+  CPDLC_RSP             CPDLC_RSP[]
+  Decodificado_ADSCPDLC Decodificado_ADSCPDLC[]
+  FMC                   FMC[]
+  STRIP_1               STRIP_1[]
+  Time_CPDLC            Time_CPDLC[]
+  TrjVoo                TrjVoo[]
+  UPLINK                UPLINK[]
+}
+
+model T_HEXCOD {
+  ID_HEX              Int     @id @default(autoincrement()) @map("1_ID_HEX")
+  REGISTRO            String? @map("2_REGISTRO") @db.VarChar(7)
+  HEXCOD              String? @map("3_HEXCOD") @db.VarChar(6)
+  SISTEMA_COD_SISTEMA Int?    @map("4_SISTEMA_COD_SISTEMA")
+
+  @@index([REGISTRO], map: "Idx_REG")
+}
+
+model T_PBCS {
+  Cod_AdsCPDLC              Int
+  a1_ATSP                   String?   @db.VarChar(4)
+  a2a_REG                   String?   @db.VarChar(7)
+  a2b_ICAO_ADDRESS          String?   @db.VarChar(6)
+  a3_TYPE_ANV               String?   @db.VarChar(4)
+  a4_AGENCY                 String?   @db.VarChar(3)
+  a5_DATE                   DateTime? @db.Date
+  a6_STATION_UP             String?   @db.VarChar(4)
+  a7_STATION_DOWN           String?   @db.VarChar(4)
+  a8_UP_TIMESTAMP           DateTime? @db.Time(0)
+  a9a_DOWN_TIMESTAMP_ATN_B1 DateTime? @db.Time(0)
+  a9b_MAS_TIMESTAMP         DateTime? @db.Time(0)
+  a10_TIME_TOTAL_UP         Int?
+  a11_DOWN_TIMESTAMP        DateTime? @db.Time(0)
+  a12_ATSP_TIMESTAMP        DateTime? @db.Time(0)
+  a13_TIME_TOTAL_OPERATION  Int?
+  a14_LATENCY_DOWN          Int?
+  a15_ELEMENT_UP            String?   @db.VarChar(50)
+  a16_ELEMENT_DOWN          String?   @db.VarChar(50)
+  a17_ACTP                  Decimal?  @db.Decimal(10, 1)
+  a18_ACP                   Int?
+  a19_PORT                  Decimal?  @db.Decimal(3, 1)
+  a20_Cpdlc_IdCpdlc_in      Int
+  a21_Cpdlc_IdCpdlc_out     Int
+  a22_DT_MAS_A              DateTime  @db.DateTime(0)
+  a23_DT_MAS_S              DateTime  @db.DateTime(0)
+  a24_SISTEMA_COD_SISTEMA   Int
+
+  @@id([Cod_AdsCPDLC, a21_Cpdlc_IdCpdlc_out, a24_SISTEMA_COD_SISTEMA, a20_Cpdlc_IdCpdlc_in, a22_DT_MAS_A, a23_DT_MAS_S])
+  @@index([Cod_AdsCPDLC], map: "idx_adscpdlc")
+  @@index([a20_Cpdlc_IdCpdlc_in], map: "idx_idmas")
+  @@index([a21_Cpdlc_IdCpdlc_out], map: "idx_idmass")
+}
+
+model TempoRCP2 {
+  Cod_AdsCPDLC      Int       @id
+  ICAO              String?   @db.VarChar(4)
+  Atsp_FIR          String?   @db.VarChar(800)
+  Data_Sag          DateTime? @db.Date
+  Id_Msg            Int?
+  MSG1              String?   @db.VarChar(500)
+  Registro          String?   @db.VarChar(8)
+  MSG_1_2_3         String?   @db.VarChar(500)
+  Tempo_Envio       DateTime? @db.Time(0)
+  Hora_sag_msg_Up   DateTime? @db.Time(0)
+  Antena            String?   @db.VarChar(5)
+  Ref_Msg           Int?
+  Retorno           String?   @db.VarChar(5)
+  MSG_D             String?   @db.VarChar(500)
+  Tempo_Retorno     DateTime? @db.Time(0)
+  Hora_sag_msg_down DateTime? @db.Time(0)
+  Actp_Desc         Int?
+  Duracao_Msg       Int?
+  Sistema           Int?
+
+  @@index([Sistema], map: "id_sistema")
+  @@index([Data_Sag], map: "idx_data")
+  @@index([Registro], map: "idx_registro")
+}
+
+model TimeAdsVoo {
+  idnew_table         Int       @id @default(autoincrement())
+  Registro            String?   @db.VarChar(7)
+  TpMsg               String?   @db.VarChar(5)
+  DataMsg             DateTime? @db.Date
+  HoraMsg             DateTime? @db.Time(0)
+  Time_Stamp          DateTime? @db.Time(0)
+  Qtd                 Int?
+  Sistema_Cod_Sistema String?   @db.VarChar(45)
+}
+
+model Time_CPDLC {
+  idTime              Int       @id @default(autoincrement())
+  Msg_Traf_in         String?   @db.VarChar(17)
+  Dt_Traf_in          DateTime? @db.DateTime(0)
+  Msg_Traf_out        String?   @db.VarChar(17)
+  Dt_Traf_out         DateTime? @db.DateTime(0)
+  Time_Confirm        Int?
+  Tipo_Msg            String?   @db.VarChar(15)
+  Cpdlc_IdCpdlc_in    Int?
+  Cpdlc_IdCpdlc_out   Int?
+  Dt_Mas              DateTime? @db.Date
+  CIA                 String?   @db.VarChar(3)
+  Registro            String?   @db.VarChar(7)
+  Antena              String?   @db.VarChar(3)
+  Tipo_Antena         String?   @db.VarChar(1)
+  Sistema_Cod_Sistema Int?
+  Sistema             Sistema?  @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_Time_CPDLC_Sistema1")
+
+  @@index([Sistema_Cod_Sistema], map: "fk_Time_CPDLC_Sistema1_idx")
+  @@index([Cpdlc_IdCpdlc_in], map: "index3")
+}
+
+model TrjVoo {
+  cdTrjVoo            Int       @default(autoincrement())
+  Registro            String?   @db.VarChar(7)
+  Tipo_Msg            String?   @db.VarChar(45)
+  DataSag             DateTime? @db.Date
+  HoraSag             DateTime? @db.Time(0)
+  Latit               String?   @db.VarChar(12)
+  Longit              String?   @db.VarChar(12)
+  Altimetria          Int?
+  TimeElapsed         Int?
+  AcurancyNm          Decimal   @db.Decimal(2, 2)
+  TStamp              DateTime? @db.Time(0)
+  QTD                 Int?
+  Sistema_Cod_Sistema Int
+  Sistema             Sistema   @relation(fields: [Sistema_Cod_Sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_TrjVoo_Sistema1")
+
+  @@id([cdTrjVoo, Sistema_Cod_Sistema, AcurancyNm])
+  @@index([Sistema_Cod_Sistema], map: "fk_TrjVoo_Sistema1_idx")
+}
+
+model UPLINK {
+  Registro            String   @db.VarChar(7)
+  Data_sag            DateTime @db.Date
+  Hora_sag            DateTime @db.Time(0)
+  Msg1                String?  @db.VarChar(145)
+  Msg2                String?  @db.VarChar(145)
+  Msg3                String?  @db.VarChar(145)
+  Msg                 String?  @db.VarChar(145)
+  Sistema_cod_sistema Int
+  Sistema             Sistema  @relation(fields: [Sistema_cod_sistema], references: [Cod_Sistema], onDelete: NoAction, onUpdate: NoAction, map: "fk_UPLINK_1")
+
+  @@id([Registro, Data_sag, Hora_sag, Sistema_cod_sistema])
+  @@index([Sistema_cod_sistema], map: "idx_centro")
+  @@index([Data_sag], map: "idx_data")
+  @@index([Registro], map: "idx_registro")
+}
+
+model VOO {
+  idAPP_VOO           Int       @id @default(autoincrement())
+  VOO                 String?   @db.VarChar(5)
+  Prefixo             String?   @db.VarChar(7)
+  Adep                String?   @db.VarChar(5)
+  Ades                String?   @db.VarChar(5)
+  Orgao               String?   @db.VarChar(5)
+  Rota                String?   @db.VarChar(480)
+  Matricula           String?   @db.VarChar(7)
+  Tp_Pista            String?   @db.VarChar(5)
+  Mod_V               String?   @db.VarChar(2)
+  Tp_V                String?   @db.VarChar(2)
+  camp                Int?
+  camp1               Int?
+  Data_I              DateTime? @db.Date
+  Hora_I              DateTime? @db.Time(0)
+  Data_F              DateTime? @db.Date
+  Hora_F              DateTime? @db.Time(0)
+  camp2               Int?
+  camp3               String?   @db.VarChar(1)
+  camp4               Int?
+  QTD_1               Int?
+  Sistema_cod_sistema Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Valid_DM {
+  dt_sag                                      DateTime? @db.Date
+  h_sag                                       DateTime? @db.Time(0)
+  REG                                         String?   @db.VarChar(7)
+  MSG                                         String?   @db.Text
+  Request_Answer                              DateTime? @db.Time(0)
+  MSG_ACTR                                    String?   @db.VarChar(501)
+  timestampdiff_second_d_hora_sag_a_hora_sag_ BigInt?   @map("timestampdiff(second,d.hora_sag,a.hora_sag)")
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Validacao_DM {
+  dt_sag                                      DateTime? @db.Date
+  h_sag                                       DateTime? @db.Time(0)
+  REG                                         String?   @db.VarChar(7)
+  MSG                                         String?   @db.Text
+  Request_Answer                              DateTime? @db.Time(0)
+  MSG_ACTR                                    String?   @db.VarChar(501)
+  timestampdiff_second_d_hora_sag_a_hora_sag_ BigInt?   @map("timestampdiff(second,d.hora_sag,a.hora_sag)")
+
+  @@ignore
+}
