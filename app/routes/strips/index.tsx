@@ -4,7 +4,6 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import {
   type LinksFunction,
   type MetaFunction,
-  type LoaderFunction,
   type LoaderFunctionArgs,
   json,
 } from "@remix-run/node";
@@ -32,9 +31,7 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export const loader: LoaderFunction = async ({
-  params,
-}: LoaderFunctionArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const strips = await db.sTRIP_1.findMany({
     where: {
       EstadoStrip: {
@@ -44,11 +41,11 @@ export const loader: LoaderFunction = async ({
     take: 20,
   });
 
-  return json({ strips });
+  return json(strips);
 };
 
 export default function Index() {
-  const { strips } = useLoaderData<typeof loader>();
+  const strips = useLoaderData<typeof loader>();
 
   console.log(strips);
 
@@ -66,32 +63,32 @@ export default function Index() {
   }, []);
 
   const layout = [
-    { i: "a", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "b", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "c", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "d", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "e", x: 4, y: 0, w: 1, h: 2.7 },
-    { i: "f", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "g", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "h", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "i", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "a1", x: 4, y: 0, w: 1, h: 2.7 },
-    { i: "a2", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "a3", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "a4", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "a5", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "a6", x: 4, y: 0, w: 1, h: 2.7 },
-    { i: "a7", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "a8", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "a9", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "aa", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "ab", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "0", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "1", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "2", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "3", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "4", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "5", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "6", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "7", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "8", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "91", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "10", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "11", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "12", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "13", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "14", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "15", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "16", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "17", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "18", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "19", x: 4, y: 0, w: 1, h: 2.7 },
   ];
 
   return (
     <div
       style={{
-        border: "1px solid #343d46",
+        border: "0px solid #343d46",
         width: "99.3vw",
         height: "98vh",
       }}
@@ -159,15 +156,20 @@ export default function Index() {
           margin: "10px",
         }}
       >
-        {layout.map((item, index) => {
+        {strips.map((item, index) => {
           return (
-            <div key={item.i} style={{ border: "0px solid" }}>
-              <StripCard matricula={"STRIP de VOO - " + index} />
+            <div key={layout[index].i} style={{ border: "0px solid" }}>
+              <StripCard
+                matricula={item.Prefixo}
+                setor={item.Setor}
+                ssr={item.CodSSR}
+                adep={item.Adep}
+                ades={item.Ades}
+              />
             </div>
           );
         })}
       </GridLayout>
-      {/* <StripCard matricula={"STRIP de VOO"} /> */}
       <div
         id="bottom"
         style={{
