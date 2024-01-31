@@ -2,7 +2,7 @@ import { Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React from "react";
 
-import FullScreenDialog from "~/components/dialogs/FullScreenDialog";
+import FullScreenDialog from "~/components/Dialogs/FullScreenDialog";
 
 interface IStripCard {
   matricula: string;

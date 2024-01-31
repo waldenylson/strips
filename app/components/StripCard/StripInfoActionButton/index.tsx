@@ -2,7 +2,7 @@ import { Info } from "@mui/icons-material";
 import { IconButton, Typography } from "@mui/material";
 import React from "react";
 
-import StripDetailDialog from "~/components/dialogs/StripDetailDialog";
+import StripDetailDialog from "~/components/Dialogs/StripDetailDialog";
 
 interface IStripCard {
   matricula: string;
