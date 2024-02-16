@@ -33,13 +33,25 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
+  // const planoArray =
+  //   await db.$queryRaw`SELECT prefixo, CONVERT(plano USING utf8) as 'plano' FROM STRIP_1 WHERE EstadoStrip <> 'TER'`;
+
+  // console.log(planoArray);
+
   const strips = await db.sTRIP_1.findMany({
     where: {
       EstadoStrip: {
         not: "TER",
       },
     },
+
     take: 20,
+  });
+
+  strips.forEach((registro, index) => {
+    const textoDoBlob = registro.Plano?.toString("utf-8"); // Substitua 'utf-8' pelo tipo de codificação apropriado se necessário
+
+    console.log(textoDoBlob);
   });
 
   return json(strips);
@@ -47,8 +59,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function Index() {
   const strips = useLoaderData<typeof loader>();
-
-  console.log(strips);
 
   /**
    * Disable ContextMenu

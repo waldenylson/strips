@@ -13,6 +13,8 @@ interface IStripCard {
   ssr: string;
   adep: string;
   ades: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // strip: any;
 }
 
 const StripCard: React.FC<IStripCard> = ({
@@ -21,6 +23,7 @@ const StripCard: React.FC<IStripCard> = ({
   ssr,
   adep,
   ades,
+  // strip,
 }) => {
   return (
     <Card

@@ -6,9 +6,11 @@ import StripDetailDialog from "~/components/Dialogs/StripDetailDialog";
 
 interface IStripCard {
   matricula: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // strip: any;
 }
 
-const StripInfoActionButton: React.FC<IStripCard> = ({ matricula }) => {
+const StripInfoActionButton: React.FC<IStripCard> = ({ matricula, strip }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
@@ -35,10 +37,7 @@ const StripInfoActionButton: React.FC<IStripCard> = ({ matricula }) => {
         dialogTitle={matricula}
       >
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium
-          ratione error veniam cupiditate nam quas qui repudiandae? Recusandae,
-          illo? Esse ipsa, ut explicabo molestiae exercitationem eveniet! Nobis
-          rerum quis temporibus?
+          <span>{strip}</span>
         </Typography>
       </StripDetailDialog>
     </>
