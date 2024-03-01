@@ -45,7 +45,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       },
     },
 
-    take: 20,
+    take: 26,
   });
 
   strips.forEach((registro, index) => {
@@ -73,35 +73,64 @@ export default function Index() {
     };
   }, []);
 
-  const layout = [
-    { i: "0", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "1", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "2", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "3", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "4", x: 4, y: 0, w: 1, h: 2.7 },
-    { i: "5", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "6", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "7", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "8", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "91", x: 4, y: 0, w: 1, h: 2.7 },
+  const defaultLayout = [
+    { i: "00", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "01", x: 1, y: 0, w: 1, h: 2.7 },
+    { i: "02", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "03", x: 2, y: 0, w: 1, h: 2.7 },
+    { i: "04", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "05", x: 3, y: 0, w: 1, h: 2.7 },
+    { i: "06", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "07", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "08", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "09", x: 5, y: 0, w: 1, h: 2.7 },
     { i: "10", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "11", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "12", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "13", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "14", x: 4, y: 0, w: 1, h: 2.7 },
-    { i: "15", x: 0, y: 0, w: 1, h: 2.7 },
-    { i: "16", x: 1, y: 0, w: 1, h: 2.7 },
-    { i: "17", x: 2, y: 0, w: 1, h: 2.7 },
-    { i: "18", x: 3, y: 0, w: 1, h: 2.7 },
-    { i: "19", x: 4, y: 0, w: 1, h: 2.7 },
+    { i: "11", x: 6, y: 0, w: 1, h: 2.7 },
+    { i: "12", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "13", x: 7, y: 0, w: 1, h: 2.7 },
+    { i: "14", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "15", x: 8, y: 0, w: 1, h: 2.7 },
+    { i: "16", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "17", x: 9, y: 0, w: 1, h: 2.7 },
+    { i: "18", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "19", x: 10, y: 0, w: 1, h: 2.7 },
+    { i: "20", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "21", x: 11, y: 0, w: 1, h: 2.7 },
+    { i: "22", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "23", x: 12, y: 0, w: 1, h: 2.7 },
+    { i: "24", x: 0, y: 0, w: 1, h: 2.7 },
+    { i: "25", x: 13, y: 0, w: 1, h: 2.7 },
   ];
+
+  const [userLayout, setUserLayout] = React.useState<object[]>();
+
+  React.useEffect(() => {
+    const layout = Promise.resolve(layoutStorageGet);
+  }, [userLayout]);
+
+  const layoutStorageSave = (
+    item: React.SetStateAction<object[] | undefined>,
+  ) => {
+    console.log(item);
+    setUserLayout(item);
+    console.log(JSON.stringify(item));
+    localStorage.setItem("layoutChanged", JSON.stringify(item));
+  };
+
+  const layoutStorageGet = () => {
+    JSON.parse(localStorage.getItem("layoutChanged") || "{}");
+  };
+
+  function handleLayoutChange() {
+    return defaultLayout;
+  }
 
   return (
     <div
       style={{
-        border: "0px solid #343d46",
-        width: "99.3vw",
-        height: "98vh",
+        border: "1px solid #343d46",
+        width: "99vw",
+        height: "99.5vh",
       }}
     >
       <div
@@ -126,34 +155,34 @@ export default function Index() {
         </div>
       </div>
 
-      <GridLayout
-        className="layout"
-        layout={layout}
-        cols={5}
-        rowHeight={50}
-        width={1900}
-        isResizable={false}
-        draggableCancel=".noDrag"
-        style={{
-          top: "20px",
-          bottom: "50px",
-          margin: "10px",
-        }}
-      >
-        {strips.map((item, index) => {
-          return (
-            <div key={layout[index].i}>
-              <StripCard
-                matricula={item.Prefixo}
-                setor={item.Setor}
-                ssr={item.CodSSR}
-                adep={item.Adep}
-                ades={item.Ades}
-              />
-            </div>
-          );
-        })}
-      </GridLayout>
+      <div id="strips-container">
+        <GridLayout
+          className="layout"
+          layout={defaultLayout}
+          cols={2}
+          rowHeight={50}
+          width={1420}
+          isResizable={false}
+          draggableCancel=".noDrag"
+          style={{}}
+          onLayoutChange={layoutStorageSave}
+        >
+          {strips.map((item, index) => {
+            return (
+              <div key={defaultLayout[index].i}>
+                <StripCard
+                  matricula={item.Prefixo}
+                  setor={item.Setor}
+                  ssr={item.CodSSR}
+                  adep={item.Adep}
+                  ades={item.Ades}
+                />
+              </div>
+            );
+          })}
+        </GridLayout>
+      </div>
+
       <div
         id="bottom"
         style={{

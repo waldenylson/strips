@@ -6,13 +6,13 @@ const Sectors: React.FC = () => {
       <div className="bottom-right-box-grid-col-1">
         <Button
           className="bottom-right-box-grid-col-1-btn"
-          style={{ color: "#fff" }}
+          style={{ color: "#fff", marginLeft: "50px" }}
         >
           SETORES
         </Button>
       </div>
       <div className="bottom-right-box-grid-col-2">
-        <span className="inline-flex items-center rounded-md bg-green-500 px-3 mx-1 py-1 text-xl font-medium text-black ring-1 ring-inset ring-green-500/10">
+        {/* <span className="inline-flex items-center rounded-md bg-green-500 px-3 mx-1 py-1 text-xl font-medium text-black ring-1 ring-inset ring-green-500/10">
           S1
         </span>
         <span className="inline-flex items-center rounded-md  bottom-right-box-grid-col-2-bg-sector px-3 mx-1 py-1 text-xl font-medium text-black ring-1 ring-inset">
@@ -26,7 +26,7 @@ const Sectors: React.FC = () => {
         </span>
         <span className="inline-flex items-center rounded-md bg-green-500 px-3 mx-1 py-1 text-xl font-medium text-black ring-1 ring-inset ring-green-500/10">
           S5
-        </span>
+        </span> */}
       </div>
     </div>
   );
