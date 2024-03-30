@@ -18,14 +18,21 @@ const Clock: React.FC = () => {
   }, [date]);
 
   return (
-    <div style={{ marginTop: "10px" }}>
-      <span className="hora">
-        {`${date.toLocaleTimeString("en-US", {
-          hour12: false,
-        })}`}
-      </span>
-      <span className="data">{`${date.toLocaleDateString("pt-BR")}`} UTC</span>
-    </div>
+    <>
+      <div className="">
+        <div className="hora">
+          {`${date.toLocaleTimeString("en-US", {
+            hour12: false,
+          })}`}
+        </div>
+      </div>
+      <div className="">
+        {" "}
+        <div className="data">{`${
+          date.toLocaleDateString("pt-BR") + " UTC"
+        }`}</div>
+      </div>
+    </>
   );
 };
 

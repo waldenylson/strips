@@ -46,7 +46,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       },
     },
 
-    take: 26,
+    take: 24,
   });
 
   strips.forEach((registro, index) => {

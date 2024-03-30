@@ -59,7 +59,7 @@ const StripCard: React.FC<IStripCard> = ({
             <i title="ADES">{ades}</i>
           </Typography>
 
-          <StripInfoActionButton matricula={matricula} />
+          {/* <StripInfoActionButton matricula={matricula} /> */}
           <StripEditActionButton matricula={matricula} />
         </CardContent>
       </Box>

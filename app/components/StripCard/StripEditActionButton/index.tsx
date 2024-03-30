@@ -25,17 +25,18 @@ const StripEditActionButton: React.FC<IStripCard> = ({ matricula }) => {
         aria-label="close"
         onClick={() => setDialogOpen(true)}
         className="noDrag"
-        style={{ position: "fixed", top: 44, right: 10 }}
+        // style={{ position: "fixed", top: 44, right: 10 }}
+        style={{ position: "fixed", top: 8, right: 10 }}
       >
         <Edit />
       </IconButton>
       <FullScreenDialog
         open={dialogOpen}
         dialogHandler={dialogHandler}
-        dialogTitle={"Editar Dados da Strip " + matricula}
+        dialogTitle={"Observações da Strip " + matricula}
       >
         <h1 style={{ fontSize: "100px" }}>
-          Formulário com Dados da STRIP para Edição
+          Formulário para anotação de observações da STRIP
         </h1>
       </FullScreenDialog>
     </>
