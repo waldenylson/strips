@@ -28,7 +28,7 @@ const StripEditActionButton: React.FC<IStripCard> = ({ matricula }) => {
         onClick={() => setDialogOpen(true)}
         className="noDrag"
         // style={{ position: "fixed", top: 44, right: 10 }}
-        style={{ position: "fixed", top: -3, right: -10 }}
+        style={{ position: "fixed", top: 3, right: 1 }}
       >
         <Edit />
       </IconButton>

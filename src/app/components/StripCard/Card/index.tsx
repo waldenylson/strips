@@ -32,8 +32,8 @@ const StripCard: React.FC<IStripCard> = ({
       sx={{
         cursor: "pointer",
         display: "flex",
-        width: 620,
-        height: 168,
+        width: 555,
+        height: 140,
         backgroundColor: "#5e5b5b", // 5e5b5b,
         borderRadius: "1px 1px 1px 1px",
         border: "1px solid",

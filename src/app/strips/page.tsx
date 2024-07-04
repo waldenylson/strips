@@ -11,7 +11,6 @@ import GridLayout from "react-grid-layout";
 
 import "./style.css";
 
-// import Clock from "@/components/Clock";
 import ConsoleStatus from "@/components/ConsoleStatus";
 import Sectors from "@/components/Sectors";
 import StripCard from "@/components/StripCard/Card";
@@ -115,8 +114,8 @@ export default function Index() {
           className="layout"
           layout={userLayout}
           cols={2}
-          rowHeight={56}
-          width={1268}
+          rowHeight={45}
+          width={1141}
           isResizable={false}
           draggableCancel=".noDrag"
           onLayoutChange={layoutStorageSave}
@@ -134,7 +133,7 @@ export default function Index() {
               </div>
             );
           })} */}
-          {Array.from({ length: 20 }, (_, index) => {
+          {Array.from({ length: 18 }, (_, index) => {
             return (
               <div key={defaultLayout[index].i}>
                 <StripCard
