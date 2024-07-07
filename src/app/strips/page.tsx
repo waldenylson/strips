@@ -82,6 +82,14 @@ export default function Index() {
     }, 1000);
   };
 
+  const gerarVoo = () => {
+    const prefixos = ["TAM", "GLO", "AZU", "TAP"];
+    const prefixoAleatorio =
+      prefixos[Math.floor(Math.random() * prefixos.length)];
+    const numeroAleatorio = Math.floor(Math.random() * 9000) + 1000;
+    return prefixoAleatorio + numeroAleatorio;
+  };
+
   return (
     <div
       style={{
@@ -145,11 +153,11 @@ export default function Index() {
               </div>
             );
           })} */}
-          {Array.from({ length: 18 }, (_, index) => {
+          {Array.from({ length: 22 }, (_, index) => {
             return (
               <div key={defaultLayout[index].i}>
                 <StripCard
-                  matricula={"TAM2522"}
+                  matricula={gerarVoo()}
                   setor={"45"}
                   ssr={"7777"}
                   adep={"SBRF"}
@@ -158,11 +166,6 @@ export default function Index() {
               </div>
             );
           })}
-          {/* {
-            Array.from({ length: 25 }, (_, index) => (
-              <StripCard key={index} />
-              <StripCard key="a" />
-            ))} */}
         </GridLayout>
       </div>
 
