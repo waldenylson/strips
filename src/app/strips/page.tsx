@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 const Clock = dynamic(() => import("@/components/Clock"), { ssr: false });
 
-import React from "react";
+import React, { useEffect } from "react";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import GridLayout from "react-grid-layout";
@@ -15,8 +15,11 @@ import ConsoleStatus from "@/components/ConsoleStatus";
 import Sectors from "@/components/Sectors";
 import StripCard from "@/components/StripCard/Card";
 import { db } from "@/app/db.server";
+import { exit } from "process";
 
 export default function Index() {
+  const [disableDrag, setDisableDrag] = React.useState(false);
+
   /**
    * Disable ContextMenu
    */
@@ -108,7 +111,6 @@ export default function Index() {
           <ConsoleStatus />
         </div>
       </div>
-
       <div id="strips-container" className="prevent-select">
         <GridLayout
           className="layout"
@@ -119,6 +121,16 @@ export default function Index() {
           isResizable={false}
           draggableCancel=".noDrag"
           onLayoutChange={layoutStorageSave}
+          // define quantidade maxima de empilhamento de strips -------------------
+          preventCollision={disableDrag}
+          onDragStop={(item) => {
+            const hasValueLessThanTen = item.some(function (value) {
+              return value.y > 29;
+            });
+
+            hasValueLessThanTen ? setDisableDrag(true) : setDisableDrag(false);
+          }}
+          // ----------------------------------------------------------------------
         >
           {/* {strips.map((item, index) => {
             return (
