@@ -153,7 +153,7 @@ export default function Index() {
               </div>
             );
           })} */}
-          {Array.from({ length: 22 }, (_, index) => {
+          {Array.from({ length: 20 }, (_, index) => {
             return (
               <div key={defaultLayout[index].i}>
                 <StripCard
