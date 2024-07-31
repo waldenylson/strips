@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
 const useStripsStore = create((set) => ({
-  return {
+  return: {
     strips: [],
-    filterStrips: (item) => set()
+    filterStrips: (item: any) => set((state: { strips: any }) => ({strips: [...state.strips, item]})),
   }
 }))

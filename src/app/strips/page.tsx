@@ -153,6 +153,25 @@ export default function Index() {
               </div>
             );
           })} */}
+
+          {/* 
+            const [search, setSearch] = useState('');
+            
+            {data
+              .filter((item) => {
+                return search.toLowerCase() === ''
+                  ? item
+                  : item.first_name.toLowerCase().includes(search);
+              })
+              .map((item, index) => (
+                <tr key={index}>
+                  <td>{item.first_name}</td>
+                  <td>{item.last_name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone}</td>
+                </tr>
+              ))} */}
+
           {Array.from({ length: 20 }, (_, index) => {
             return (
               <div key={defaultLayout[index].i}>
