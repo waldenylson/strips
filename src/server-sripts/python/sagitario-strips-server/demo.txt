@@ -1,0 +1,16 @@
+H01
+  |LCO1504  00|TASIL   |ORARO    |SALPU|INTOL|VUNOK|2808
+  |GVAC   A2034|0509     -|0525     -|0541      -|0557    -|0608     - |2023
+  W|      B763H|340    320|340   320| 340   320    | 340    320|   340    320|1829
+  I|SBGR   N0455|-    |1:   AEBK|ACT
+  | UN873   UN873|PBN/A1B1C1D1L1I1S1     S2 DAT/CPDLCX 1F|2:     GR    | CPL
+  CP|CCCXD|-      -|-    |STP
+
+
+H01
+  |LCO8921  00|TASIL   |ORARO    |SALPU|INTOL|VUNOK|2808
+  |GVAC   A2036|0509     -|0525     -|0541      -|0557    -|0608     - |2023
+  W|      D763Y|340    320|340   320| 340   320    | 340    320|   340    320|1829
+  I|SBGR   M0381|-    |1:   AEBK|ACT
+  | UN873   UN529|PBN/A1B1C1D1L1I1S1     S2 DAT/CPDLCX 1F|2:     GR    | CPL
+  CP|CCCXD|-      -|-    |STP
