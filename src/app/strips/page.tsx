@@ -16,9 +16,13 @@ import Sectors from "@/components/Sectors";
 import StripCard from "@/components/StripCard/Card";
 import { db } from "@/app/db.server";
 import { exit } from "process";
+import { useStripsStore } from "../stores/StripsStore";
 
 export default function Index() {
   const [disableDrag, setDisableDrag] = React.useState(false);
+  const strips = useStripsStore();
+
+  console.log(strips);
 
   /**
    * Disable ContextMenu
@@ -153,24 +157,6 @@ export default function Index() {
               </div>
             );
           })} */}
-
-          {/* 
-            const [search, setSearch] = useState('');
-            
-            {data
-              .filter((item) => {
-                return search.toLowerCase() === ''
-                  ? item
-                  : item.first_name.toLowerCase().includes(search);
-              })
-              .map((item, index) => (
-                <tr key={index}>
-                  <td>{item.first_name}</td>
-                  <td>{item.last_name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                </tr>
-              ))} */}
 
           {Array.from({ length: 20 }, (_, index) => {
             return (

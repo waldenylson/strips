@@ -8,18 +8,9 @@ import React from "react";
 
 import StripEditActionButton from "../StripEditActionButton";
 import StripInfoActionButton from "../StripInfoActionButton";
+import { TStripCard } from "./TStripCard";
 
-interface IStripCard {
-  matricula: string;
-  setor: string;
-  ssr: string;
-  adep: string;
-  ades: string | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // strip: any;
-}
-
-const StripCard: React.FC<IStripCard> = ({
+const StripCard: React.FC<TStripCard> = ({
   matricula,
   setor,
   ssr,
