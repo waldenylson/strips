@@ -20,7 +20,7 @@ import { useStripsStore } from "../stores/StripsStore";
 
 export default function Index() {
   const [disableDrag, setDisableDrag] = React.useState(false);
-  const strips = useStripsStore();
+  const strips = useStripsStore((state) => state.fetchStrips);
 
   console.log(strips);
 
@@ -158,7 +158,7 @@ export default function Index() {
             );
           })} */}
 
-          {Array.from({ length: 20 }, (_, index) => {
+          {/* {Array.from({ length: 20 }, (_, index) => {
             return (
               <div key={defaultLayout[index].i}>
                 <StripCard
@@ -170,7 +170,7 @@ export default function Index() {
                 />
               </div>
             );
-          })}
+          })} */}
         </GridLayout>
       </div>
 

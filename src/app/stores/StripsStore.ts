@@ -14,20 +14,21 @@ export const useStripsStore = create<StripsStore>((set) => {
   return {
     strips: [],
     fetchStrips: async () => {
-      const teste = data.filter((item) => {
-        return item.EstadoStrip === "TER";
-      });
+      const teste = data.strips
+        .filter((item: { EstadoStrip: string }) => {
+          return item.EstadoStrip === "TER";
+        })
+        .map((item) => {
+          return {
+            matricula: item.Prefixo,
+            setor: item.Setor,
+            ssr: item.CodSSR,
+            adep: item.Adep,
+            ades: item.Ades,
+          };
+        });
 
-      console.log(teste);
-      // .map((item) => {
-      //   return {
-      //     matricula: item.Prefixo,
-      //     setor: item.Setor,
-      //     ssr: item.CodSSR,
-      //     adep: item.Adep,
-      //     ades: item.Ades,
-      //   };
-      // });
+      set((state) => teste);
     },
     addToStripStore: (item) =>
       set((state) => ({

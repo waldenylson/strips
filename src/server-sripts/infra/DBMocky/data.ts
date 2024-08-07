@@ -1,3 +1,3 @@
-import * as json from "./strips-banco-sergio.json"
+import * as json from "./strips-banco-sergio.json";
 
-export const data = json
+export const data = JSON.parse(JSON.stringify(json));
