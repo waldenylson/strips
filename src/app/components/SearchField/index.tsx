@@ -1,3 +1,4 @@
+import { useStripsStore } from "@/app/stores/StripsStore";
 import { Search, Close } from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -8,13 +9,19 @@ import React from "react";
 export default function CustomizedInputBase() {
   const [search, setSearch] = React.useState("");
 
+  const [clearFilter, filterstrips] = useStripsStore((state) => [
+    state.clearFilter,
+    state.filterStrips,
+  ]);
+
   const handleClick = () => {
     if (search) {
       setSearch("");
+      clearFilter;
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
 
@@ -40,6 +47,7 @@ export default function CustomizedInputBase() {
         inputProps={{ "aria-label": "Filtrar STRIPS" }}
         onChange={(e) => {
           setSearch(e.target.value);
+          filterstrips(e.target.value);
         }}
         value={search}
       />

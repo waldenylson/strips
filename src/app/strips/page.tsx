@@ -20,9 +20,7 @@ import { useStripsStore } from "../stores/StripsStore";
 
 export default function Index() {
   const [disableDrag, setDisableDrag] = React.useState(false);
-  const strips = useStripsStore((state) => state.fetchStrips);
-
-  console.log(strips);
+  const strips = useStripsStore((state) => state.strips);
 
   /**
    * Disable ContextMenu
@@ -144,19 +142,19 @@ export default function Index() {
           }}
           // ----------------------------------------------------------------------
         >
-          {/* {strips.map((item, index) => {
+          {strips.map((item, index) => {
             return (
               <div key={defaultLayout[index].i}>
                 <StripCard
-                  matricula={item.Prefixo}
-                  setor={item.Setor}
-                  ssr={item.CodSSR}
-                  adep={item.Adep}
-                  ades={item.Ades}
+                  matricula={item.matricula}
+                  setor={item.setor}
+                  ssr={item.ssr}
+                  adep={item.adep}
+                  ades={item.ades}
                 />
               </div>
             );
-          })} */}
+          })}
 
           {/* {Array.from({ length: 20 }, (_, index) => {
             return (

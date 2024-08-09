@@ -7,38 +7,52 @@ type StripsStore = {
   strips: TStripCard[];
   addToStripStore: (item: TStripCard) => void;
   filterStrips: (matricula: string) => void;
-  fetchStrips: () => Promise<void>;
+  clearFilter: () => void;
 };
 
 export const useStripsStore = create<StripsStore>((set) => {
-  return {
-    strips: [],
-    fetchStrips: async () => {
-      const teste = data.strips
-        .filter((item: { EstadoStrip: string }) => {
-          return item.EstadoStrip === "TER";
-        })
-        .map((item) => {
-          return {
-            matricula: item.Prefixo,
-            setor: item.Setor,
-            ssr: item.CodSSR,
-            adep: item.Adep,
-            ades: item.Ades,
-          };
-        });
+  const filteredData = data.strips
+    .filter((item: { EstadoStrip: string }) => {
+      return item.EstadoStrip !== "TER";
+    })
+    .map(
+      (item: {
+        Prefixo: any;
+        Setor: any;
+        CodSSR: any;
+        Adep: any;
+        Ades: any;
+      }) => {
+        return {
+          matricula: item.Prefixo,
+          setor: item.Setor,
+          ssr: item.CodSSR,
+          adep: item.Adep,
+          ades: item.Ades,
+        };
+      }
+    )
+    .slice(0, 20);
 
-      set((state) => teste);
-    },
-    addToStripStore: (item) =>
+  return {
+    strips: filteredData,
+
+    addToStripStore: (item) => {
       set((state) => ({
         strips: [...state.strips, item],
-      })),
-    filterStrips: (matricula) =>
+      }));
+    },
+    filterStrips: (matricula) => {
       set((state) => ({
         strips: state.strips.filter((item) => {
           return item.matricula.toLocaleLowerCase().includes(matricula);
         }),
-      })),
+      }));
+    },
+    clearFilter: () => {
+      set((state) => ({
+        strips: filteredData,
+      }));
+    },
   };
 });
