@@ -1,4 +1,5 @@
 import { useStripsStore } from "@/app/stores/StripsStore";
+import { defaultLayout } from "@/app/strips/page";
 import { Search, Close } from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -8,6 +9,7 @@ import React from "react";
 
 export default function CustomizedInputBase() {
   const [search, setSearch] = React.useState("");
+  const [userLayout, setUserLayout] = React.useState<any>();
 
   const [clearFilter, filterstrips] = useStripsStore((state) => [
     state.clearFilter,
@@ -24,6 +26,12 @@ export default function CustomizedInputBase() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
+
+  function handleLayoutRestore() {
+    setTimeout(() => {
+      localStorage.removeItem("layoutSavedOnDrag");
+    }, 1000);
+  }
 
   return (
     <Paper
@@ -48,6 +56,7 @@ export default function CustomizedInputBase() {
         onChange={(e) => {
           setSearch(e.target.value);
           filterstrips(e.target.value);
+          handleLayoutRestore();
         }}
         value={search}
       />

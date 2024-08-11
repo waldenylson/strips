@@ -5,6 +5,7 @@ import { data } from "@/server-sripts/infra/DBMocky/data";
 
 type StripsStore = {
   strips: TStripCard[];
+  filteredStrips: TStripCard[];
   addToStripStore: (item: TStripCard) => void;
   filterStrips: (matricula: string) => void;
   clearFilter: () => void;
@@ -36,6 +37,7 @@ export const useStripsStore = create<StripsStore>((set) => {
 
   return {
     strips: filteredData,
+    filteredStrips: filteredData,
 
     addToStripStore: (item) => {
       set((state) => ({
@@ -44,7 +46,7 @@ export const useStripsStore = create<StripsStore>((set) => {
     },
     filterStrips: (matricula) => {
       set((state) => ({
-        strips: state.strips.filter((item) => {
+        strips: state.filteredStrips.filter((item) => {
           return item.matricula.toLocaleLowerCase().includes(matricula);
         }),
       }));
@@ -53,6 +55,7 @@ export const useStripsStore = create<StripsStore>((set) => {
       set((state) => ({
         strips: filteredData,
       }));
+      console.log("clearFilter", filteredData);
     },
   };
 });
