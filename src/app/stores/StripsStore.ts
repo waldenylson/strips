@@ -1,3 +1,5 @@
+"use client";
+
 import { create } from "zustand";
 
 import { TStripCard } from "@/components/StripCard/Card/TStripCard";
@@ -5,6 +7,7 @@ import { data } from "@/server-sripts/infra/DBMocky/data";
 
 type StripsStore = {
   strips: TStripCard[];
+  teste: number;
   filteredStrips: TStripCard[];
   addToStripStore: (item: TStripCard) => void;
   filterStrips: (matricula: string) => void;
@@ -38,6 +41,7 @@ export const useStripsStore = create<StripsStore>((set) => {
   return {
     strips: filteredData,
     filteredStrips: filteredData,
+    teste: 1,
 
     addToStripStore: (item) => {
       set((state) => ({
@@ -55,7 +59,6 @@ export const useStripsStore = create<StripsStore>((set) => {
       set((state) => ({
         strips: filteredData,
       }));
-      console.log("clearFilter", filteredData);
     },
   };
 });

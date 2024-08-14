@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import ActiveSectorsSelection from "../ActiveSectorsSelection";
 import SearchField from "../SearchField";
 import SpeedDialTootipMenu from "../SpeedDialTootipMenu";
