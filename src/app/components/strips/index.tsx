@@ -61,7 +61,7 @@ export default function Strips() {
     <>
       <GridLayout
         className="layout"
-        layout={defaultLayout}
+        layout={userLayout}
         cols={2}
         rowHeight={45}
         width={1141}
