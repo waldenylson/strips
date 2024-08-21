@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     children: React.ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -41,7 +41,7 @@ const FullScreenDialog: React.FC<IDialogData> = ({
           <Typography variant="h6">{otherProps.dialogTitle}</Typography>
         </Toolbar>
       </AppBar>
-      <Container style={{ marginTop: "100px", border: "1px solid" }}>
+      <Container style={{ marginTop: "100px", border: "0px solid" }}>
         {children}
       </Container>
     </Dialog>

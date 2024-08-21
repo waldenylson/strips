@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.swal2-container {
+  z-index: 10000;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

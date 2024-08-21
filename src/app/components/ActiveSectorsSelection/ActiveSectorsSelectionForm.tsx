@@ -8,6 +8,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
 import * as React from "react";
+import Swal from "sweetalert2";
 
 export default function ActiveSectorsSelectionForm() {
   const [state, setState] = React.useState({
@@ -23,13 +24,33 @@ export default function ActiveSectorsSelectionForm() {
     });
   };
 
+  const ControlledSectorsSave = (item: any) => {
+    localStorage.setItem("ControlledSectors", JSON.stringify(item));
+  };
+
+  const ControlledSectorsGet = () => {
+    if (localStorage.getItem("ControlledSectors")) {
+      setState(JSON.parse(localStorage.getItem("ControlledSectors") || ""));
+    } else {
+      setState({
+        setorxx: true,
+        setorxy: false,
+        setorxz: false,
+      });
+    }
+  };
+
+  React.useEffect(() => {
+    ControlledSectorsGet();
+  }, []);
+
   const { setorxx, setorxy, setorxz } = state;
   const error = [setorxx, setorxy, setorxz].filter((v) => v).length !== 2;
 
   return (
     <>
       <Box sx={{ display: "flex", fontSize: "30px" }}>
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormControl sx={{ m: 2 }} component="fieldset" variant="standard">
           <FormLabel component="legend">
             Selecionar Setores Controlados
           </FormLabel>
@@ -79,6 +100,21 @@ export default function ActiveSectorsSelectionForm() {
         variant="contained"
         sx={{ marginBottom: 5, width: "150px" }}
         startIcon={<CheckCircle />}
+        onClick={() => {
+          ControlledSectorsSave(state).then(() => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Setores Selecionados com sucesso!",
+              showConfirmButton: true,
+              focusConfirm: true,
+              timer: 3000,
+              backdrop: false,
+              timerProgressBar: true,
+              toast: true,
+            });
+          });
+        }}
       >
         Aplicar
       </Button>
